@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static List<Integer> luckyNumbers = new ArrayList<Integer>();
-    public static Scanner in = new Scanner(System.in);
+    private static List<Integer> luckyNumbers = new ArrayList<>();
+    private static Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
 
@@ -15,20 +15,16 @@ public class Main {
         lotteryMachine.drawing(luckyNumbers);
     }
 
-    public static void giveNumbers() {
+    private static void giveNumbers() {
         int countdown = 0;
         int action;
         while (countdown != 6) {
             System.out.print("Give a number");
             action = in.nextInt();
-            if(!(isAlready(action))){
-                if (!isInRange(action)) {
-                    System.out.println("Choose Between 1 and 46");
-                } else {
+            if(!(isAlready(action)) && isInRange(action)){
                     luckyNumbers.add(action);
                     System.out.println("You added " + action);
                     countdown++;
-                }
             }
         }
     }
@@ -46,6 +42,7 @@ public class Main {
     private static boolean isInRange(int action){
         boolean isInRange=true;
         if(action < 1 || action > 46){
+            System.out.println("Choose Between 1 and 46");
             isInRange=false;
         }
         return isInRange;
